@@ -20,8 +20,32 @@ public class PlayerController : MonoBehaviour
             // State = idle
             _velocity = Vector2.zero;
         }
+        
+        ChangeSprites();
     }
 
+    private void ChangeSprites()
+    {
+        if (_moveInput == Vector2.zero) return;
+        
+        if (_moveInput.y > 0)
+        {
+            player.SetSpritesUp();
+        }
+        else if (_moveInput.y < 0)
+        {
+            player.SetSpritesDown();
+        }
+        else if (_moveInput.x > 0)
+        {
+            player.SetSpritesRight();
+        }
+        else if (_moveInput.x < 0)
+        {
+            player.SetSpritesLeft();
+        }
+    }
+    
     private void FixedUpdate()
     {
         ApplyVelocity(Time.deltaTime);
