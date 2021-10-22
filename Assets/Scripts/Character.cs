@@ -27,8 +27,6 @@ public class Character : MonoBehaviour
     [SerializeField] private Sprite downMaskSprite;
     [SerializeField] private Sprite leftMaskSprite;
     [SerializeField] private Sprite rightMaskSprite;
-
-    [SerializeField] Rigidbody2D rb;
     
     
     [Header("Player Stats")] 
@@ -40,10 +38,7 @@ public class Character : MonoBehaviour
     private Sprite _leftMaskSprite = null;
     private Sprite _rightMaskSprite = null;
 
-    public Rigidbody2D Rigidbody2D => rb;
-    private void Awake()
-    {
-    }
+
 
     private void Start()
     {
@@ -53,14 +48,6 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // FOR DEBUG
-        Mouse mouse = InputSystem.GetDevice<Mouse>();
-        
-        if(mouse.leftButton.isPressed)
-            wearMask();
-    }
 
     public float GetMoveSpeed()
     {

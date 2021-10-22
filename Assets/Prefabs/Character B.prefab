@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c627e2dc98d67484d9afc00cf6314439, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4804539229176188755
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c9c0e8fbc7de4c4e93466944e1bdbff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2a343f133ab7f94daa67def1ebad517, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -285,7 +285,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4892f84ef0ec5b742b36fc8928ff483b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3cbd80cf28461641a0ce4c48dfbea9a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 3024795353411123922}
   - component: {fileID: 7893615653950157900}
   m_Layer: 0
-  m_Name: Character A
+  m_Name: Character B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,23 +377,23 @@ MonoBehaviour:
   maskSprite: {fileID: 4804539228426240714}
   clotheSprite: {fileID: 4804539230048085271}
   hairSprite: {fileID: 4804539229352502469}
-  upSprite: {fileID: 21300000, guid: b87346df072640e499782e5b16404eaa, type: 3}
-  downSprite: {fileID: 21300000, guid: 4c9c0e8fbc7de4c4e93466944e1bdbff, type: 3}
-  leftSprite: {fileID: 21300000, guid: 467d7f4ce2f03544fae5567350df2d40, type: 3}
-  rightSprite: {fileID: 21300000, guid: f4739d51ae4186544a977ab8bf05f211, type: 3}
-  upHairSprite: {fileID: 21300000, guid: 8123df3473da0794aa59e36de07aed75, type: 3}
-  downHairSprite: {fileID: 21300000, guid: 4892f84ef0ec5b742b36fc8928ff483b, type: 3}
-  leftHairSprite: {fileID: 21300000, guid: 2f7599dd711d8c543a76e3e0e95e6319, type: 3}
-  rightHairSprite: {fileID: 21300000, guid: 40367f5cb7a776f4da558cc5cfffff38, type: 3}
-  upClotheSprite: {fileID: 21300000, guid: aafb51007b000e7419309f4aa6684582, type: 3}
-  downClotheSprite: {fileID: 21300000, guid: aafb51007b000e7419309f4aa6684582, type: 3}
-  leftClotheSprite: {fileID: 21300000, guid: 93d31beaef76e7a4097713162bf59ae9, type: 3}
-  rightClotheSprite: {fileID: 21300000, guid: f897e09d8d7cf14478843168d2b5689c, type: 3}
+  upSprite: {fileID: 21300000, guid: a931e79a7da1b1c4da7795b28fad082d, type: 3}
+  downSprite: {fileID: 21300000, guid: a2a343f133ab7f94daa67def1ebad517, type: 3}
+  leftSprite: {fileID: 21300000, guid: b1ab1b94d56bcf540b721007402065fd, type: 3}
+  rightSprite: {fileID: 21300000, guid: 44909019b6cae1940888366f14a32fca, type: 3}
+  upHairSprite: {fileID: 21300000, guid: a3cbd80cf28461641a0ce4c48dfbea9a, type: 3}
+  downHairSprite: {fileID: 21300000, guid: a3cbd80cf28461641a0ce4c48dfbea9a, type: 3}
+  leftHairSprite: {fileID: 21300000, guid: a3cbd80cf28461641a0ce4c48dfbea9a, type: 3}
+  rightHairSprite: {fileID: 21300000, guid: a3cbd80cf28461641a0ce4c48dfbea9a, type: 3}
+  upClotheSprite: {fileID: 21300000, guid: f7dd5f6f6c65b5c4cbfe2beab5eff64d, type: 3}
+  downClotheSprite: {fileID: 21300000, guid: f7dd5f6f6c65b5c4cbfe2beab5eff64d, type: 3}
+  leftClotheSprite: {fileID: 21300000, guid: 870ecf847c77cbc4f84a5969a0ec32f8, type: 3}
+  rightClotheSprite: {fileID: 21300000, guid: 9d0133fb3891615409cbc308064abb87, type: 3}
   upMaskSprite: {fileID: 21300000, guid: 321470e0a5ed5864b8e404285cc34315, type: 3}
   downMaskSprite: {fileID: 21300000, guid: c627e2dc98d67484d9afc00cf6314439, type: 3}
   leftMaskSprite: {fileID: 21300000, guid: 890557c939018eb4bbb0f971a31f3b95, type: 3}
   rightMaskSprite: {fileID: 21300000, guid: cecf3ce2ec2f0e8409925d6e21eb10ac, type: 3}
-  moveSpeed: 2
+  moveSpeed: 1.5
   isWearingMask: 1
   personController: {fileID: 3024795353411123922}
 --- !u!114 &3024795353411123922
@@ -503,7 +503,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: aafb51007b000e7419309f4aa6684582, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7dd5f6f6c65b5c4cbfe2beab5eff64d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
