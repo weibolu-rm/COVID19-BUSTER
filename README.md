@@ -1,6 +1,7 @@
 # COMP 376 - Assignment 2
 
 
+
 Your first Unity programming assignment is to develop a 2D variation of Paperboy but in
 a COVID-19 context. In this variation rather than delivering papers, the game will have a
 protagonist fighting against COVID-19 by providing masks and vaccines, disinfecting the
@@ -48,4 +49,10 @@ slow down time to do as many things as possible. In this special mode, number of
 will also increase. The player will use a special key to toggle this mode for a limited time
 (say, 3 seconds). Missed opportunities will cost 2 points and successful actions will yield
 1 point each in this mode.
+
+## Acknowledgements 
+
+Unity2D doesn't support NavMesh natively, and so I'm using a free 2D implementation by h8man
+
+[NavMeshPlus](https://github.com/h8man/NavMeshPlus)
 
