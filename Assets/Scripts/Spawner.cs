@@ -28,9 +28,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Mouse mouse = InputSystem.GetDevice<Mouse>();
-        if(mouse.leftButton.wasPressedThisFrame)
-            Spawn();
+
 
     }
 
