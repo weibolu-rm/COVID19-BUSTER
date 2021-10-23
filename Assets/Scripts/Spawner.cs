@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
 
     private int _childCount;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _childCount = transform.childCount;
         for (int i = 0; i < _childCount; i++)
@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Mouse mouse = InputSystem.GetDevice<Mouse>();
         if(mouse.leftButton.wasPressedThisFrame)

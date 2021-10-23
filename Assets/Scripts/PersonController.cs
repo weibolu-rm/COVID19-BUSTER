@@ -9,7 +9,7 @@ public class PersonController : MonoBehaviour
 {
 	[SerializeField] private Transform currentTarget;
 	[SerializeField] private Person person;
-	[SerializeField] private float timeBetweenTargets = 10f;
+	[SerializeField] private float timeBetweenTargets = 20f;
 	
     [SerializeField] List<Transform> _targets;
 	
@@ -29,7 +29,7 @@ public class PersonController : MonoBehaviour
 		_agent.updateRotation = false;
 		_agent.updateUpAxis = false;
 		_agent.speed = person.GetMoveSpeed();
-		_lastTargetSwitchTime = Time.deltaTime;
+		_lastTargetSwitchTime = Time.time;
 	}
 	
     private void Update()
