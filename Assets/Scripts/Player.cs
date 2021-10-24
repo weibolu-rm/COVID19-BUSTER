@@ -85,6 +85,7 @@ public class Player : Character
         _nextShotTime = Time.time + shootCd/1000;
         float angle = Mathf.Atan2(Forward.y, Forward.x) * Mathf.Rad2Deg;
         Projectile pew = Instantiate(projectile, rb.position, Quaternion.Euler(0f, 0f, angle)) as Projectile;
+        pew.Initialize(Forward);
     }
     private void ReloadMasks()
     {
