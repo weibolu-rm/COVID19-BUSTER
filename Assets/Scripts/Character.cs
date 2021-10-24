@@ -39,16 +39,18 @@ public class Character : MonoBehaviour
     private Sprite _rightMaskSprite = null;
 
 
+    protected Vector3 Forward = Vector3.down;
 
     private void Start()
     {
         if (isWearingMask)
         {
-            wearMask();
+            WearMask();
         }
     }
 
 
+    
     public float GetMoveSpeed()
     {
         // possibility to add functionality
@@ -60,7 +62,7 @@ public class Character : MonoBehaviour
         clotheSprite.sprite = leftClotheSprite;
         maskSprite.sprite = _leftMaskSprite;
         hairSprite.sprite = leftHairSprite;
-        
+        Forward = Vector3.left; 
     }
     public void SetSpritesRight()
     {
@@ -68,6 +70,7 @@ public class Character : MonoBehaviour
         clotheSprite.sprite = rightClotheSprite;
         maskSprite.sprite = _rightMaskSprite;
         hairSprite.sprite = rightHairSprite;
+        Forward = Vector3.right; 
     }
     public void SetSpritesUp()
     {
@@ -75,6 +78,7 @@ public class Character : MonoBehaviour
         clotheSprite.sprite = upClotheSprite;
         maskSprite.sprite = _upMaskSprite;
         hairSprite.sprite = upHairSprite;
+        Forward = Vector3.up; 
     }
     public void SetSpritesDown()
     {
@@ -82,9 +86,10 @@ public class Character : MonoBehaviour
         clotheSprite.sprite = downClotheSprite;
         maskSprite.sprite = _downMaskSprite;
         hairSprite.sprite = downHairSprite;
+        Forward = Vector3.down; 
     }
 
-    public void wearMask()
+    public void WearMask()
     {
         isWearingMask = true;
         _downMaskSprite = downMaskSprite;

@@ -44,6 +44,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MaskShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""4865d3dc-abd9-4614-98f3-1f8a426151f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VaccineShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""a879169d-6ca7-4fa8-a318-953516901aad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +130,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb9b3216-6560-4c09-b2c1-573425049ef5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MaskShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8c32a94-15f4-46a0-85ad-4e24956b572b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VaccineShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +162,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_MaskShoot = m_Gameplay.FindAction("MaskShoot", throwIfNotFound: true);
+        m_Gameplay_VaccineShoot = m_Gameplay.FindAction("VaccineShoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,12 +225,16 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_MaskShoot;
+    private readonly InputAction m_Gameplay_VaccineShoot;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
         public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @MaskShoot => m_Wrapper.m_Gameplay_MaskShoot;
+        public InputAction @VaccineShoot => m_Wrapper.m_Gameplay_VaccineShoot;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -204,6 +250,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @MaskShoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMaskShoot;
+                @MaskShoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMaskShoot;
+                @MaskShoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMaskShoot;
+                @VaccineShoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVaccineShoot;
+                @VaccineShoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVaccineShoot;
+                @VaccineShoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVaccineShoot;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -214,6 +266,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @MaskShoot.started += instance.OnMaskShoot;
+                @MaskShoot.performed += instance.OnMaskShoot;
+                @MaskShoot.canceled += instance.OnMaskShoot;
+                @VaccineShoot.started += instance.OnVaccineShoot;
+                @VaccineShoot.performed += instance.OnVaccineShoot;
+                @VaccineShoot.canceled += instance.OnVaccineShoot;
             }
         }
     }
@@ -222,5 +280,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnMaskShoot(InputAction.CallbackContext context);
+        void OnVaccineShoot(InputAction.CallbackContext context);
     }
 }

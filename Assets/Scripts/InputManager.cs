@@ -7,12 +7,17 @@ using UnityEngine.Events;
 
 [Serializable] public class MoveInputEvent : UnityEvent<Vector2> {};
 [Serializable] public class PauseInputEvent : UnityEvent{};
+[Serializable] public class MaskShootInputEvent : UnityEvent{};
+[Serializable] public class VaccineShootInputEvent : UnityEvent{};
 public class InputManager : MonoBehaviour
 {
     private Controls _controls;
     public MoveInputEvent moveInputEvent;
     public PauseInputEvent pauseInputEvent;
+    public MaskShootInputEvent MaskShootInputEvent;
+    public VaccineShootInputEvent VaccineShootInputEvent;
 
+    
     private void Awake()
     {
         _controls = new Controls();
@@ -24,6 +29,8 @@ public class InputManager : MonoBehaviour
         _controls.Gameplay.Move.performed += OnMovePerformed;
         _controls.Gameplay.Move.canceled += OnMovePerformed;
         _controls.Gameplay.Pause.performed += _ => OnPausePerformed();
+        _controls.Gameplay.MaskShoot.performed += _ => OnMaskShootPerformed();
+        _controls.Gameplay.VaccineShoot.performed += _ => OnVaccineShootPerformed();
 
     }
 
@@ -38,8 +45,17 @@ public class InputManager : MonoBehaviour
         pauseInputEvent.Invoke();
     }
 
-
-
+    private void OnMaskShootPerformed()
+    {
+        MaskShootInputEvent.Invoke();
+    }
+    
+    private void OnVaccineShootPerformed()
+    {
+        VaccineShootInputEvent.Invoke(); 
+    }
+    
+    
 
     private void OnDisable()
     {
