@@ -1,4 +1,7 @@
+using System;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace UI
 {
@@ -7,6 +10,9 @@ namespace UI
 
         [SerializeField] private GameObject pauseUI;
         private static bool _isPaused = false;
+
+        public GameEvent togglePauseEvent;
+
 
         private void Resume()
         {
@@ -24,6 +30,7 @@ namespace UI
 
         public void OnPauseInput()
         {
+            togglePauseEvent.Raise();
             if (_isPaused)
             {
                 Resume();

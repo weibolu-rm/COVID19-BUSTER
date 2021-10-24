@@ -41,6 +41,8 @@ public class Character : MonoBehaviour
 
     protected Vector3 Forward = Vector3.down;
 
+    public bool IsWearingMask => isWearingMask;
+
     private void Start()
     {
         if (isWearingMask)

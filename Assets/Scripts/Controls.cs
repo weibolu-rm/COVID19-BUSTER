@@ -44,24 +44,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MaskShoot"",
-                    ""type"": ""Button"",
-                    ""id"": ""4865d3dc-abd9-4614-98f3-1f8a426151f2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""VaccineShoot"",
-                    ""type"": ""Button"",
-                    ""id"": ""a879169d-6ca7-4fa8-a318-953516901aad"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,10 +112,36 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Action"",
+            ""id"": ""d5c105a9-d073-40e2-85c5-ca35e4069764"",
+            ""actions"": [
+                {
+                    ""name"": ""MaskShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""d31f1e34-00ce-40e1-944e-6c595bdfd447"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""VaccineShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""26cebdcb-7c88-45a4-a36f-8b68d422be3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""fb9b3216-6560-4c09-b2c1-573425049ef5"",
+                    ""id"": ""4d62282d-b6e9-407c-a046-d96cb8277650"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -144,7 +152,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b8c32a94-15f4-46a0-85ad-4e24956b572b"",
+                    ""id"": ""dead9e1c-8132-4eab-9420-206965d2d2e4"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -162,8 +170,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
-        m_Gameplay_MaskShoot = m_Gameplay.FindAction("MaskShoot", throwIfNotFound: true);
-        m_Gameplay_VaccineShoot = m_Gameplay.FindAction("VaccineShoot", throwIfNotFound: true);
+        // Action
+        m_Action = asset.FindActionMap("Action", throwIfNotFound: true);
+        m_Action_MaskShoot = m_Action.FindAction("MaskShoot", throwIfNotFound: true);
+        m_Action_VaccineShoot = m_Action.FindAction("VaccineShoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,16 +235,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Pause;
-    private readonly InputAction m_Gameplay_MaskShoot;
-    private readonly InputAction m_Gameplay_VaccineShoot;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
         public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
-        public InputAction @MaskShoot => m_Wrapper.m_Gameplay_MaskShoot;
-        public InputAction @VaccineShoot => m_Wrapper.m_Gameplay_VaccineShoot;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,12 +256,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                @MaskShoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMaskShoot;
-                @MaskShoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMaskShoot;
-                @MaskShoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMaskShoot;
-                @VaccineShoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVaccineShoot;
-                @VaccineShoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVaccineShoot;
-                @VaccineShoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVaccineShoot;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -266,6 +266,41 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Action
+    private readonly InputActionMap m_Action;
+    private IActionActions m_ActionActionsCallbackInterface;
+    private readonly InputAction m_Action_MaskShoot;
+    private readonly InputAction m_Action_VaccineShoot;
+    public struct ActionActions
+    {
+        private @Controls m_Wrapper;
+        public ActionActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MaskShoot => m_Wrapper.m_Action_MaskShoot;
+        public InputAction @VaccineShoot => m_Wrapper.m_Action_VaccineShoot;
+        public InputActionMap Get() { return m_Wrapper.m_Action; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionActions set) { return set.Get(); }
+        public void SetCallbacks(IActionActions instance)
+        {
+            if (m_Wrapper.m_ActionActionsCallbackInterface != null)
+            {
+                @MaskShoot.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnMaskShoot;
+                @MaskShoot.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnMaskShoot;
+                @MaskShoot.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnMaskShoot;
+                @VaccineShoot.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnVaccineShoot;
+                @VaccineShoot.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnVaccineShoot;
+                @VaccineShoot.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnVaccineShoot;
+            }
+            m_Wrapper.m_ActionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
                 @MaskShoot.started += instance.OnMaskShoot;
                 @MaskShoot.performed += instance.OnMaskShoot;
                 @MaskShoot.canceled += instance.OnMaskShoot;
@@ -275,11 +310,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public GameplayActions @Gameplay => new GameplayActions(this);
+    public ActionActions @Action => new ActionActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IActionActions
+    {
         void OnMaskShoot(InputAction.CallbackContext context);
         void OnVaccineShoot(InputAction.CallbackContext context);
     }

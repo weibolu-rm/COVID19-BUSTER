@@ -14,8 +14,8 @@ public class InputManager : MonoBehaviour
     private Controls _controls;
     public MoveInputEvent moveInputEvent;
     public PauseInputEvent pauseInputEvent;
-    public MaskShootInputEvent MaskShootInputEvent;
-    public VaccineShootInputEvent VaccineShootInputEvent;
+    public MaskShootInputEvent maskShootInputEvent;
+    public VaccineShootInputEvent vaccineShootInputEvent;
 
     
     private void Awake()
@@ -26,14 +26,33 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         _controls.Gameplay.Enable();
+        _controls.Action.Enable();
         _controls.Gameplay.Move.performed += OnMovePerformed;
         _controls.Gameplay.Move.canceled += OnMovePerformed;
         _controls.Gameplay.Pause.performed += _ => OnPausePerformed();
-        _controls.Gameplay.MaskShoot.performed += _ => OnMaskShootPerformed();
-        _controls.Gameplay.VaccineShoot.performed += _ => OnVaccineShootPerformed();
+        _controls.Action.MaskShoot.performed += _ => OnMaskShootPerformed();
+        _controls.Action.VaccineShoot.performed += _ => OnVaccineShootPerformed();
 
     }
 
+    private void OnDisable()
+    {
+        _controls.Gameplay.Disable();
+        _controls.Action.Disable();
+    }
+    
+    // For external use, here only need for "Action" ActionMap
+    public void ToggleActionMap()
+    {
+        if (_controls.Action.enabled)
+        {
+            _controls.Action.Disable();
+        }
+        else
+        {
+            _controls.Action.Enable(); 
+        }
+    }
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
         Vector2 moveInput = ctx.ReadValue<Vector2>();
@@ -47,18 +66,14 @@ public class InputManager : MonoBehaviour
 
     private void OnMaskShootPerformed()
     {
-        MaskShootInputEvent.Invoke();
+        maskShootInputEvent.Invoke();
     }
     
     private void OnVaccineShootPerformed()
     {
-        VaccineShootInputEvent.Invoke(); 
+        vaccineShootInputEvent.Invoke(); 
     }
-    
-    
 
-    private void OnDisable()
-    {
-        _controls.Gameplay.Disable();
-    }
+
+
 }

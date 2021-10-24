@@ -52,7 +52,10 @@ will also increase. The player will use a special key to toggle this mode for a 
 
 ## Acknowledgements 
 
-Unity2D doesn't support NavMesh natively, and so I'm using a free 2D implementation by h8man
+- Unity2D doesn't support NavMesh natively, and so I'm using a free 2D implementation by h8man
+[NavMeshPlus](https://github.com/h8man/NavMeshPlus) which adapts the existing Unity NavMesh to 
+work in 2D.
+- I've yoinked the SS13 floor and wall tiles, as well as the base character body. The rest 
+ of the pixel-art (hair, clothes, items, objects...) is done by me 
 
-[NavMeshPlus](https://github.com/h8man/NavMeshPlus)
 

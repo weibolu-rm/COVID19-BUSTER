@@ -32,13 +32,26 @@ public class Spawner : MonoBehaviour
 
     }
 
-    private void Spawn()
+    public void Spawn()
     {
         Vector3 pos = _spawns[Random.Range(0, _childCount)].position;
         Person person = persons[Random.Range(0, persons.Count)];
 
         person.PersonController.SetTargetsList(ref targets);
         person.PersonController.ChangeTarget();
+
+        // Spawn prefab -> pass target list -> choose random target
+        Instantiate(person, pos, Quaternion.identity);
+    }
+    
+    
+    public void Spawn(Transform target)
+    {
+        Vector3 pos = _spawns[Random.Range(0, _childCount)].position;
+        Person person = persons[Random.Range(0, persons.Count)];
+
+        person.PersonController.SetTargetsList(ref targets);
+        person.PersonController.ChangeTarget(target);
 
         // Spawn prefab -> pass target list -> choose random target
         Instantiate(person, pos, Quaternion.identity);

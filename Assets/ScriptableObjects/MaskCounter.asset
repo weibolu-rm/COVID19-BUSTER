@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e323c9bc743a844483f4b993b87b7d7, type: 3}
   m_Name: MaskCounter
   m_EditorClassIdentifier: 
-  initialValue: 5
-  runTimeValue: 5
+  initialValue: 10
+  runTimeValue: 10

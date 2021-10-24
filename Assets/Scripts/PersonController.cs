@@ -43,7 +43,6 @@ public class PersonController : MonoBehaviour
 
 	    if (Time.time > _lastTargetSwitchTime + timeBetweenTargets)
 	    {
-		    Debug.Log("Changed Target");
 		    ChangeTarget();
 	    }
         ChangeSprites();
