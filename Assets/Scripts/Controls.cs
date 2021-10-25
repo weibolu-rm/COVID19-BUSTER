@@ -136,6 +136,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IsolationInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecb2bbe6-ea7c-4e42-a783-356b310426bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Disinfect"",
+                    ""type"": ""Button"",
+                    ""id"": ""813d7dc2-c883-454e-8e75-ec074a5bc191"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -160,6 +178,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""VaccineShoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d62a5fed-ca95-45d8-90c4-65b28698c7e7"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsolationInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30f5ebce-e572-4954-990c-c499dd6122f2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Disinfect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -174,6 +214,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Action = asset.FindActionMap("Action", throwIfNotFound: true);
         m_Action_MaskShoot = m_Action.FindAction("MaskShoot", throwIfNotFound: true);
         m_Action_VaccineShoot = m_Action.FindAction("VaccineShoot", throwIfNotFound: true);
+        m_Action_IsolationInteraction = m_Action.FindAction("IsolationInteraction", throwIfNotFound: true);
+        m_Action_Disinfect = m_Action.FindAction("Disinfect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,12 +318,16 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IActionActions m_ActionActionsCallbackInterface;
     private readonly InputAction m_Action_MaskShoot;
     private readonly InputAction m_Action_VaccineShoot;
+    private readonly InputAction m_Action_IsolationInteraction;
+    private readonly InputAction m_Action_Disinfect;
     public struct ActionActions
     {
         private @Controls m_Wrapper;
         public ActionActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MaskShoot => m_Wrapper.m_Action_MaskShoot;
         public InputAction @VaccineShoot => m_Wrapper.m_Action_VaccineShoot;
+        public InputAction @IsolationInteraction => m_Wrapper.m_Action_IsolationInteraction;
+        public InputAction @Disinfect => m_Wrapper.m_Action_Disinfect;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -297,6 +343,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @VaccineShoot.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnVaccineShoot;
                 @VaccineShoot.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnVaccineShoot;
                 @VaccineShoot.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnVaccineShoot;
+                @IsolationInteraction.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnIsolationInteraction;
+                @IsolationInteraction.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnIsolationInteraction;
+                @IsolationInteraction.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnIsolationInteraction;
+                @Disinfect.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnDisinfect;
+                @Disinfect.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnDisinfect;
+                @Disinfect.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnDisinfect;
             }
             m_Wrapper.m_ActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -307,6 +359,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @VaccineShoot.started += instance.OnVaccineShoot;
                 @VaccineShoot.performed += instance.OnVaccineShoot;
                 @VaccineShoot.canceled += instance.OnVaccineShoot;
+                @IsolationInteraction.started += instance.OnIsolationInteraction;
+                @IsolationInteraction.performed += instance.OnIsolationInteraction;
+                @IsolationInteraction.canceled += instance.OnIsolationInteraction;
+                @Disinfect.started += instance.OnDisinfect;
+                @Disinfect.performed += instance.OnDisinfect;
+                @Disinfect.canceled += instance.OnDisinfect;
             }
         }
     }
@@ -320,5 +378,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnMaskShoot(InputAction.CallbackContext context);
         void OnVaccineShoot(InputAction.CallbackContext context);
+        void OnIsolationInteraction(InputAction.CallbackContext context);
+        void OnDisinfect(InputAction.CallbackContext context);
     }
 }

@@ -8,9 +8,9 @@ public class Vaccine : Projectile
     public GameEvent firstDoseEvent;
     public GameEvent secondDoseEvent;
 
-    public void Vaccinate(Person person)
+    private void Vaccinate(Person person)
     {
-        if (person.isImmune) return;
+        if (person.hadSecondDose) return;
         
         if (!person.hadFirstDose)
         {
@@ -19,9 +19,9 @@ public class Vaccine : Projectile
         Debug.Log("FIRST DOSE EVENT");
         }
         // Immune on second dose
-        else if (!person.isImmune)
+        else if (!person.hadSecondDose)
         {
-            person.isImmune = true;
+            person.hadSecondDose = true;
             secondDoseEvent.Raise();
             Debug.Log("SECOND DOSE EVENT");
         }

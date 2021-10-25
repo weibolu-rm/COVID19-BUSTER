@@ -20,7 +20,6 @@ public class Mask : Projectile
     {
         if (other.CompareTag("People"))
         {
-            Debug.Log("Wear Mask");
             var person = other.GetComponent<Person>();
             WearMask(person);
         }

@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
     
     private void SpawnPerson()
     {
-        Debug.Log("Spawned");
         spawnEvent.Raise();
     }
     

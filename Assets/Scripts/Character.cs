@@ -43,8 +43,8 @@ public class Character : MonoBehaviour
 
     public bool IsWearingMask => isWearingMask;
 
-    private void Start()
-    {
+    protected virtual void Start()
+    { 
         if (isWearingMask)
         {
             WearMask();

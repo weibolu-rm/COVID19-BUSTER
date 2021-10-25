@@ -36,8 +36,9 @@ public class Player : Character
 
     public PlayerController PlayerController => playerController;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _nextShotTime = Time.time;
     }
 

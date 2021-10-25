@@ -9,6 +9,8 @@ using UnityEngine.Events;
 [Serializable] public class PauseInputEvent : UnityEvent{};
 [Serializable] public class MaskShootInputEvent : UnityEvent{};
 [Serializable] public class VaccineShootInputEvent : UnityEvent{};
+[Serializable] public class IsolationInteractionInputEvent : UnityEvent{};
+[Serializable] public class DisinfectInputEvent : UnityEvent{};
 public class InputManager : MonoBehaviour
 {
     private Controls _controls;
@@ -16,6 +18,8 @@ public class InputManager : MonoBehaviour
     public PauseInputEvent pauseInputEvent;
     public MaskShootInputEvent maskShootInputEvent;
     public VaccineShootInputEvent vaccineShootInputEvent;
+    public IsolationInteractionInputEvent isolationInteractionInputEvent;
+    public DisinfectInputEvent disinfectInputEvent;
 
     
     private void Awake()
@@ -32,8 +36,11 @@ public class InputManager : MonoBehaviour
         _controls.Gameplay.Pause.performed += _ => OnPausePerformed();
         _controls.Action.MaskShoot.performed += _ => OnMaskShootPerformed();
         _controls.Action.VaccineShoot.performed += _ => OnVaccineShootPerformed();
+        _controls.Action.IsolationInteraction.performed += _ => OnIsolationInteractionPerformed();
+        _controls.Action.Disinfect.performed += _ => OnDisinfectPerformed();
 
     }
+
 
     private void OnDisable()
     {
@@ -74,6 +81,15 @@ public class InputManager : MonoBehaviour
         vaccineShootInputEvent.Invoke(); 
     }
 
+    private void OnDisinfectPerformed()
+    {
+        disinfectInputEvent.Invoke();
+    }
+
+    private void OnIsolationInteractionPerformed()
+    {
+        isolationInteractionInputEvent.Invoke();
+    }
 
 
 }
