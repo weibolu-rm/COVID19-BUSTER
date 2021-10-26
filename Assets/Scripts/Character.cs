@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour
 {
     [Header("Sprite fields")]
@@ -32,6 +33,9 @@ public class Character : MonoBehaviour
     [Header("Player Stats")] 
     [SerializeField] private float moveSpeed;
     [SerializeField] private bool isWearingMask;
+
+    protected SpriteRenderer CharacterSprite => characterSprite;
+
     
     private Sprite _upMaskSprite = null;
     private Sprite _downMaskSprite = null;

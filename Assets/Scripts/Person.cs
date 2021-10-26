@@ -20,6 +20,8 @@ public class Person : Character
     public bool isVulnerable;
     public bool isIsolating;
 
+    public GameEvent infectedEvent;
+    public PersonController PersonController => personController;
 
     protected override void Start()
     {
@@ -32,7 +34,10 @@ public class Person : Character
         currentState = PersonState.Wandering;
         
         hadFirstDose = Probabilities.ChooseBasedOnProbability(Probability.Medium);
-        hadSecondDose = Probabilities.ChooseBasedOnProbability(Probability.Low);
+        if (hadFirstDose)
+        {
+            hadSecondDose = Probabilities.ChooseBasedOnProbability(Probability.Low);
+        }
         
         if (Probabilities.ChooseBasedOnProbability(Probability.Low))
         {
@@ -48,7 +53,25 @@ public class Person : Character
         };
         
     }
+
+    public void GetInfected()
+    {
+        isInfected = true;
+        infectedEvent.Raise();
+    }
+
+    private void InfectedFlash()
+    {
+        if (isInfected)
+        {
+            CharacterSprite.color = CharacterSprite.color != Color.red ? Color.red : Color.white;
+        }
+    }
+
+    public void OnTickEvent()
+    {
+        InfectedFlash();
+    }
     
-    public PersonController PersonController => personController;
 
 }

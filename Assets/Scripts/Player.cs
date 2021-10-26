@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerController))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class Player : Character
 {
 

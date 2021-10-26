@@ -34,7 +34,7 @@ public class PersonController : MonoBehaviour
 	
     private void Update()
     {
-	    if (currentTarget)
+	    if (currentTarget && person.currentState == PersonState.Wandering)
 	    {
 			var targetPosition = currentTarget.position;
 			_agent.SetDestination(targetPosition);

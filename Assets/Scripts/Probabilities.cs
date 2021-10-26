@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public enum Probability
 {
+    VeryLow,
     Low,
     Medium,
     High,
@@ -18,6 +19,7 @@ public static class Probabilities
     {
         float threshold = p switch
         {
+            Probability.VeryLow => 0.05f,
             Probability.Low => 0.2f,
             Probability.Medium => 0.5f,
             Probability.High => 0.8f,
