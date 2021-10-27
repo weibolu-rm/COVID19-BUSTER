@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float spawnCd = 10f;
     [SerializeField] private FloatValue scoreCounter;
+    [SerializeField] private FloatValue highestScore;
     [SerializeField] private GameEvent scoreUpdateEvent;
     
     public GameEvent spawnEvent;
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
         if (_gameShouldEnd)
         {
             gameEndedEvent.Raise();
+            // for the highscore to get the update
+            scoreUpdateEvent.Raise();
         }
     }
 
@@ -44,6 +47,12 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(float scoreDelta)
     {
         scoreCounter.runTimeValue += scoreDelta;
+        // Update Highest Score
+        if (scoreCounter.runTimeValue > highestScore.runTimeValue)
+        {
+            highestScore.runTimeValue = scoreCounter.runTimeValue;
+        }
+            
         scoreUpdateEvent.Raise();
         if (scoreCounter.runTimeValue <= -20)
         {
@@ -55,6 +64,25 @@ public class GameManager : MonoBehaviour
     {
         spawnEvent.Raise();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if (other.CompareTag("People"))
+        {
+            var otherPerson = other.GetComponent<Person>();
+            otherPerson.SetInGameArea();
+        }
+    }
     
     
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        
+        if (other.CompareTag("People"))
+        {
+            var otherPerson = other.GetComponent<Person>();
+            otherPerson.SetOutsideGameArea();
+        }
+    }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TickSystem : MonoBehaviour
 {
     [SerializeField] private GameEvent tickEvent;
+    [SerializeField] private GameEvent tenTickEvent;
     
     private const float TICK_TIMER_THRESHOLD = .6f;
     private float _tick;
@@ -26,6 +27,10 @@ public class TickSystem : MonoBehaviour
             _tick++;
             
             tickEvent.Raise();
+            if (_tick % 10 == 0)
+            {
+                tenTickEvent.Raise();
+            }
         }
     }
 }

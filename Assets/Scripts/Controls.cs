@@ -154,6 +154,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scream"",
+                    ""type"": ""Button"",
+                    ""id"": ""fcba0d0f-ee03-4f37-8251-00df0aa0734f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -200,6 +209,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Disinfect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cd5e5ff-1219-4af9-adf9-cb65d64c2ca6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scream"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -216,6 +236,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Action_VaccineShoot = m_Action.FindAction("VaccineShoot", throwIfNotFound: true);
         m_Action_IsolationInteraction = m_Action.FindAction("IsolationInteraction", throwIfNotFound: true);
         m_Action_Disinfect = m_Action.FindAction("Disinfect", throwIfNotFound: true);
+        m_Action_Scream = m_Action.FindAction("Scream", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -320,6 +341,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Action_VaccineShoot;
     private readonly InputAction m_Action_IsolationInteraction;
     private readonly InputAction m_Action_Disinfect;
+    private readonly InputAction m_Action_Scream;
     public struct ActionActions
     {
         private @Controls m_Wrapper;
@@ -328,6 +350,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @VaccineShoot => m_Wrapper.m_Action_VaccineShoot;
         public InputAction @IsolationInteraction => m_Wrapper.m_Action_IsolationInteraction;
         public InputAction @Disinfect => m_Wrapper.m_Action_Disinfect;
+        public InputAction @Scream => m_Wrapper.m_Action_Scream;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -349,6 +372,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Disinfect.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnDisinfect;
                 @Disinfect.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnDisinfect;
                 @Disinfect.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnDisinfect;
+                @Scream.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnScream;
+                @Scream.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnScream;
+                @Scream.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnScream;
             }
             m_Wrapper.m_ActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -365,6 +391,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Disinfect.started += instance.OnDisinfect;
                 @Disinfect.performed += instance.OnDisinfect;
                 @Disinfect.canceled += instance.OnDisinfect;
+                @Scream.started += instance.OnScream;
+                @Scream.performed += instance.OnScream;
+                @Scream.canceled += instance.OnScream;
             }
         }
     }
@@ -380,5 +409,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnVaccineShoot(InputAction.CallbackContext context);
         void OnIsolationInteraction(InputAction.CallbackContext context);
         void OnDisinfect(InputAction.CallbackContext context);
+        void OnScream(InputAction.CallbackContext context);
     }
 }

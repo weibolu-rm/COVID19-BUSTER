@@ -11,6 +11,7 @@ using UnityEngine.Events;
 [Serializable] public class VaccineShootInputEvent : UnityEvent{};
 [Serializable] public class IsolationInteractionInputEvent : UnityEvent{};
 [Serializable] public class DisinfectInputEvent : UnityEvent{};
+[Serializable] public class ScreamInputEvent : UnityEvent{};
 public class InputManager : MonoBehaviour
 {
     private Controls _controls;
@@ -20,6 +21,7 @@ public class InputManager : MonoBehaviour
     public VaccineShootInputEvent vaccineShootInputEvent;
     public IsolationInteractionInputEvent isolationInteractionInputEvent;
     public DisinfectInputEvent disinfectInputEvent;
+    public ScreamInputEvent ScreamInputEvent;
 
     
     private void Awake()
@@ -38,8 +40,10 @@ public class InputManager : MonoBehaviour
         _controls.Action.VaccineShoot.performed += _ => OnVaccineShootPerformed();
         _controls.Action.IsolationInteraction.performed += _ => OnIsolationInteractionPerformed();
         _controls.Action.Disinfect.performed += _ => OnDisinfectPerformed();
+        _controls.Action.Scream.performed += _ => OnScreamPerformed();
 
     }
+
 
 
     private void OnDisable()
@@ -91,5 +95,8 @@ public class InputManager : MonoBehaviour
         isolationInteractionInputEvent.Invoke();
     }
 
-
+    private void OnScreamPerformed()
+    {
+        ScreamInputEvent.Invoke();
+    }
 }

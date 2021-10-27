@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -7,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class PersonController : MonoBehaviour
 {
+	[SerializeField] private MapManager mapManager;
+	
 	[SerializeField] private Transform currentTarget;
 	[SerializeField] private Person person;
 	[SerializeField] private float timeBetweenTargets = 20f;
@@ -21,6 +24,11 @@ public class PersonController : MonoBehaviour
 	public void SetTargetsList( ref List<Transform> targets)
 	{
 		_targets = targets;
+	}
+
+	public bool GetTileAtPositionData()
+	{
+		return mapManager.GetTileInfectedData(person.transform.position);
 	}
 
 
@@ -49,6 +57,12 @@ public class PersonController : MonoBehaviour
     }
 
 
+    // For social distancing
+    public void SetDistance(float radius)
+    {
+	    _agent.radius = radius;
+    }
+    
     // Assign a random target
     public void ChangeTarget()
     {

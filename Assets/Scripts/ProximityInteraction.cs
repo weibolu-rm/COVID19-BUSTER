@@ -1,18 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class PeopleProximityManager : MonoBehaviour
+public class ProximityInteraction : PeopleProximitySensor
 {
     [SerializeField] private Person person;
-    private List<Person> _proximityList = new List<Person>();
-    private int _proximityCount;
-
     public void OnTickEvent()
     {
-        if (_proximityCount == 0) return;
+        if (ProximityCount == 0) return;
         
         ChanceToInfect();
     }
@@ -21,7 +16,7 @@ public class PeopleProximityManager : MonoBehaviour
     {
         if (!person.isInfected) return;
 
-        foreach (var other in _proximityList)
+        foreach (var other in ProximityList)
         {
             // Second dose = immune
             if (other.hadSecondDose) continue;
@@ -73,29 +68,9 @@ public class PeopleProximityManager : MonoBehaviour
             if (willGetInfected)
             {
                 other.GetInfected();
-                Debug.Log("INFECTION SPREAD!!!");
             }
         }
 
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("People"))
-        {
-            var otherPerson = other.GetComponent<Person>();
-            _proximityList.Add(otherPerson);
-            _proximityCount++;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("People"))
-        {
-            var otherPerson = other.GetComponent<Person>();
-            _proximityList.Remove(otherPerson);
-            _proximityCount--;
-        }
-    }
 }

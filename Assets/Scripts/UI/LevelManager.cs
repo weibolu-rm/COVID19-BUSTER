@@ -5,6 +5,8 @@ namespace UI
 {
     public class LevelManager : MonoBehaviour
     {
+        [SerializeField] private GameObject gameOverUI;
+        public GameEvent togglePauseEvent;
         void Start()
         {
             // If we're coming form the Pause Menu
@@ -19,6 +21,14 @@ namespace UI
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void OnGameOverEvent()
+        {
+            gameOverUI.SetActive(true);
+            
+            togglePauseEvent.Raise();
+            Time.timeScale = 0f;
         }
 
     }
