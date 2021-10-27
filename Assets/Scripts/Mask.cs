@@ -13,7 +13,6 @@ public class Mask : Projectile
         
         person.WearMask();
         maskEvent.Raise();
-        Debug.Log("WEAR MASK EVENT");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

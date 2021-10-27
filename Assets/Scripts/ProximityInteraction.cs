@@ -14,6 +14,7 @@ public class ProximityInteraction : PeopleProximitySensor
 
     private void ChanceToInfect()
     {
+        // Can only infect others when infected..
         if (!person.isInfected) return;
 
         foreach (var other in ProximityList)
@@ -22,48 +23,56 @@ public class ProximityInteraction : PeopleProximitySensor
             if (other.hadSecondDose) continue;
             
             bool willGetInfected = false;
-            
-            // First roll
-            switch (person.IsWearingMask)
+            int rolls = 1;
+
+            // If person is vulnerable, they get two rolls, i.e. twice as likely to be infected
+            if (other.isVulnerable) rolls = 2;
+
+            while (rolls > 0)
             {
-                case true:
+                
+                switch (person.IsWearingMask)
                 {
-                    // Mask = low chance of infection
-                    if (Probabilities.ChooseBasedOnProbability(Probability.Low))
+                    case true:
                     {
-                        willGetInfected = true;
-                    } break;
-                }
-                case false:
-                {
-                    // No Mask = medium chance of infection
-                    if (Probabilities.ChooseBasedOnProbability(Probability.Medium))
+                        // if both are wearing masks, then don't infect.
+                        if (other.IsWearingMask) return;
+
+                        if (other.hadFirstDose)
+                        {
+                            //  infected is wearing mask + other had first dose
+                            if(Probabilities.ChooseBasedOnProbability(Probability.VeryLow))
+                            {
+                                willGetInfected = true;
+                            }
+                        }
+                        // infected is wearking mask + other not vaccinated
+                        else if (Probabilities.ChooseBasedOnProbability(Probability.Low))
+                        {
+                            willGetInfected = true;
+                        } break;
+                    }
+                    case false:
                     {
-                        willGetInfected = true;
-                    } break;
+                        if (other.hadFirstDose)
+                        {
+                            //  infected is not wearing mask + other had first dose
+                            if(Probabilities.ChooseBasedOnProbability(Probability.Low))
+                            {
+                                willGetInfected = true;
+                            }
+                        }
+                        // No Mask + No vaccine = medium chance of infection (this is happening every tick, not a one chance thing, so it's still pretty high)
+                        else if (Probabilities.ChooseBasedOnProbability(Probability.Medium))
+                        {
+                            willGetInfected = true;
+                        } break;
+                    }
                 }
+
+                rolls--;
             }
-            
-            // Second roll
-            switch (other.isVulnerable)
-            {
-                case true:
-                {
-                    // Mask & vulnerable = Medium chance of infection
-                    if (Probabilities.ChooseBasedOnProbability(Probability.Medium))
-                    {
-                        willGetInfected = true;
-                    } break;
-                }
-                case false:
-                {
-                    // No Mask  & vulnerable = high chance of infection
-                    if (Probabilities.ChooseBasedOnProbability(Probability.High))
-                    {
-                        willGetInfected = true;
-                    } break;
-                }
-            }
+
 
             if (willGetInfected)
             {

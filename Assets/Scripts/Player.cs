@@ -55,21 +55,11 @@ public class Player : Character
 
     private void Update()
     {
-        // FOR DEBUG
-        Keyboard kb = InputSystem.GetDevice<Keyboard>();
-
-        if (kb.rKey.wasPressedThisFrame)
-        {
-            ReloadMasks();
-            ReloadVaccine();
-        } 
-
         UpdateScreamBubble();
     }
 
     private void UpdateScreamBubble()
     {
-        
         // reset scream
         if (Time.time > _nextBubbleTime)
         {

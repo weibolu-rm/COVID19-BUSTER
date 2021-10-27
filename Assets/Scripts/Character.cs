@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     
     
     [Header("Player Stats")] 
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private FloatValue moveSpeed;
     [SerializeField] private bool isWearingMask;
 
     protected SpriteRenderer CharacterSprite => characterSprite;
@@ -60,7 +60,7 @@ public class Character : MonoBehaviour
     public float GetMoveSpeed()
     {
         // possibility to add functionality
-        return moveSpeed;
+        return moveSpeed.runTimeValue;
     }
     public void SetSpritesLeft()
     {

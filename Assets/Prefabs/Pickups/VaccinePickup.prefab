@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4236161655527625708}
   - component: {fileID: 4236161655527625709}
   - component: {fileID: 4236161655527625706}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VaccinePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

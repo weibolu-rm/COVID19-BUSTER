@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 75398575087718079}
   - component: {fileID: 75398575087718078}
   - component: {fileID: 75398575087718077}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MaskPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

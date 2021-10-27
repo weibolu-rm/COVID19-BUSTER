@@ -163,6 +163,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""c782dd59-2b30-4b22-867b-878080a6ea82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -220,6 +229,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Scream"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f43e5517-b71c-4571-95aa-e6a698113e3e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -237,6 +257,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Action_IsolationInteraction = m_Action.FindAction("IsolationInteraction", throwIfNotFound: true);
         m_Action_Disinfect = m_Action.FindAction("Disinfect", throwIfNotFound: true);
         m_Action_Scream = m_Action.FindAction("Scream", throwIfNotFound: true);
+        m_Action_SpecialMode = m_Action.FindAction("SpecialMode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -342,6 +363,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Action_IsolationInteraction;
     private readonly InputAction m_Action_Disinfect;
     private readonly InputAction m_Action_Scream;
+    private readonly InputAction m_Action_SpecialMode;
     public struct ActionActions
     {
         private @Controls m_Wrapper;
@@ -351,6 +373,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @IsolationInteraction => m_Wrapper.m_Action_IsolationInteraction;
         public InputAction @Disinfect => m_Wrapper.m_Action_Disinfect;
         public InputAction @Scream => m_Wrapper.m_Action_Scream;
+        public InputAction @SpecialMode => m_Wrapper.m_Action_SpecialMode;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -375,6 +398,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Scream.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnScream;
                 @Scream.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnScream;
                 @Scream.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnScream;
+                @SpecialMode.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnSpecialMode;
+                @SpecialMode.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnSpecialMode;
+                @SpecialMode.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnSpecialMode;
             }
             m_Wrapper.m_ActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -394,6 +420,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Scream.started += instance.OnScream;
                 @Scream.performed += instance.OnScream;
                 @Scream.canceled += instance.OnScream;
+                @SpecialMode.started += instance.OnSpecialMode;
+                @SpecialMode.performed += instance.OnSpecialMode;
+                @SpecialMode.canceled += instance.OnSpecialMode;
             }
         }
     }
@@ -410,5 +439,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnIsolationInteraction(InputAction.CallbackContext context);
         void OnDisinfect(InputAction.CallbackContext context);
         void OnScream(InputAction.CallbackContext context);
+        void OnSpecialMode(InputAction.CallbackContext context);
     }
 }

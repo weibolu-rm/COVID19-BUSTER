@@ -371,16 +371,18 @@ MonoBehaviour:
   downMaskSprite: {fileID: 21300000, guid: c627e2dc98d67484d9afc00cf6314439, type: 3}
   leftMaskSprite: {fileID: 21300000, guid: 890557c939018eb4bbb0f971a31f3b95, type: 3}
   rightMaskSprite: {fileID: 21300000, guid: cecf3ce2ec2f0e8409925d6e21eb10ac, type: 3}
-  moveSpeed: 2.2
+  moveSpeed: {fileID: 11400000, guid: 83e8002d4086a6e49b7fd7d6d61575dc, type: 2}
   isWearingMask: 0
   personController: {fileID: 3024795353411123922}
   leaveTimer: 60
+  infectionSpreadCd: 5
+  infectedAreaPrefab: {fileID: 3039081901689892483, guid: 9ea9ff28b9b4d964bb4baee1651ab7e9, type: 3}
   currentState: 0
   hadFirstDose: 0
   hadSecondDose: 0
   isInfected: 0
   isVulnerable: 0
-  isIsolating: 0
+  isolationArea: {fileID: 0}
   infectedEvent: {fileID: 11400000, guid: c150728f616eaf74b8d777857e3694e6, type: 2}
 --- !u!114 &3024795353411123922
 MonoBehaviour:
@@ -398,65 +400,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   person: {fileID: 5802271056983954020}
   timeBetweenTargets: 10
-  _targets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  targets: []
 --- !u!195 &7893615653950157900
 NavMeshAgent:
   m_ObjectHideFlags: 0

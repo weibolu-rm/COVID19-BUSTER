@@ -42,6 +42,8 @@ public class PersonController : MonoBehaviour
 	
     private void Update()
     {
+	    _agent.speed = person.GetMoveSpeed();
+	    
 	    if (currentTarget && person.currentState != PersonState.Interacting)
 	    {
 			var targetPosition = currentTarget.position;
@@ -67,6 +69,8 @@ public class PersonController : MonoBehaviour
     // Assign a random target
     public void ChangeTarget()
     {
+	    if (targets.Count == 0) return; 
+	    
 	    currentTarget = targets[Random.Range(0, targets.Count)];
 	    _lastTargetSwitchTime = Time.time;
     }

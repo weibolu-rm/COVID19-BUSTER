@@ -29,6 +29,8 @@ public class PlayerToPeopleInteraction : PeopleProximitySensor
         {
             if (person && person.isInfected)
             {
+                if (person.currentState == PersonState.Isolating) return; // already isolating
+                
                 person.SendToIsolation();
                 isolationEvent.Raise();
             }

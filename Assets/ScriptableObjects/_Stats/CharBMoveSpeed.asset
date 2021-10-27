@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9058f63cf4a4d3c46b4001939813293c, type: 3}
-  m_Name: InfectableTileData
+  m_Script: {fileID: 11500000, guid: 6e323c9bc743a844483f4b993b87b7d7, type: 3}
+  m_Name: CharBMoveSpeed
   m_EditorClassIdentifier: 
-  tiles: []
-  isInfected: 0
+  initialValue: 1.5
+  runTimeValue: 1.5

@@ -16,14 +16,12 @@ public class Vaccine : Projectile
         {
             person.hadFirstDose = true;
             firstDoseEvent.Raise();
-        Debug.Log("FIRST DOSE EVENT");
         }
         // Immune on second dose
         else if (!person.hadSecondDose)
         {
             person.hadSecondDose = true;
             secondDoseEvent.Raise();
-            Debug.Log("SECOND DOSE EVENT");
         }
     }
 

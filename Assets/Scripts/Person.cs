@@ -16,6 +16,8 @@ public class Person : Character
 {
     [SerializeField] private PersonController personController;
     [SerializeField] private float leaveTimer;
+    [SerializeField] private float infectionSpreadCd;
+    [SerializeField] private InfectedArea infectedAreaPrefab;
     
     public PersonState currentState;
     public bool hadFirstDose;
@@ -31,12 +33,14 @@ public class Person : Character
 
     private bool _inGameArea;
     private float _spawnTime;
+    private float _lastInfectionSpreadTime;
 
     protected override void Start()
     {
         base.Start();
         Initialize();
         _spawnTime = Time.time;
+        _lastInfectionSpreadTime = Time.time;
     }
 
     private void Update()
@@ -46,8 +50,27 @@ public class Person : Character
             // Aight ima head out
             Leave();
         }
+
+        if (isInfected && Time.time > _lastInfectionSpreadTime + infectionSpreadCd)
+        {
+            ChanceToContaminate();
+        }
     }
 
+
+    private void ChanceToContaminate()
+    {
+        if (!_inGameArea) return;
+        
+        _lastInfectionSpreadTime = Time.time;
+        
+        // 50% chance
+        if (!Probabilities.ChooseBasedOnProbability(Probability.Medium)) return;
+        
+        Instantiate(infectedAreaPrefab, transform.position, Quaternion.identity);
+    }
+    
+    
     private void Initialize()
     {
         currentState = PersonState.Wandering;
