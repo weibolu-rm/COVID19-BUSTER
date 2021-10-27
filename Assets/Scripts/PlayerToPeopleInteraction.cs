@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ScreamInteraction : PeopleProximitySensor
+public class PlayerToPeopleInteraction : PeopleProximitySensor
 {
     public GameEvent socialDistancingEvent;
+    public GameEvent isolationEvent;
 
     // yo 2m apart
     public void SocialDistancing()
@@ -18,6 +19,19 @@ public class ScreamInteraction : PeopleProximitySensor
                 socialDistancingEvent.Raise();
             }
             person.EngageInSocialDistancing();
+        }
+    }
+
+    public void SendToIsolation()
+    {
+        
+        foreach (var person in ProximityList)
+        {
+            if (person && person.isInfected)
+            {
+                person.SendToIsolation();
+                isolationEvent.Raise();
+            }
         }
     }
 

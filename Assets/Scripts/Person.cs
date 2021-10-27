@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -21,7 +22,8 @@ public class Person : Character
     public bool hadSecondDose;
     public bool isInfected;
     public bool isVulnerable;
-    public bool isIsolating;
+    
+    public Transform isolationArea;
     
 
     public GameEvent infectedEvent;
@@ -35,6 +37,15 @@ public class Person : Character
         base.Start();
         Initialize();
         _spawnTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if (Time.time > _spawnTime + leaveTimer)
+        {
+            // Aight ima head out
+            Leave();
+        }
     }
 
     private void Initialize()
@@ -60,6 +71,11 @@ public class Person : Character
             false => Probabilities.ChooseBasedOnProbability(Probability.Low)
         };
         
+    }
+
+    public void SetIsolationArea(Transform area)
+    {
+        isolationArea = area;
     }
 
     public void SetInGameArea()
@@ -99,6 +115,18 @@ public class Person : Character
     {
         InfectedFlash();
     }
-    
 
+
+    private void Leave()
+    {
+        currentState = PersonState.Leaving;
+        personController.ChangeTarget(isolationArea);
+    }
+
+    public void SendToIsolation()
+    {
+        currentState = PersonState.Isolating;
+        personController.ChangeTarget(isolationArea);
+    }
+    
 }

@@ -32,7 +32,7 @@ public class Player : Character
     [Header("Player specific sprite")] 
     [SerializeField] private SpriteRenderer screamBubble;
     [SerializeField] private float bubbleTimeLength;
-    [SerializeField] private ScreamInteraction _screamInteraction;
+    [SerializeField] private PlayerToPeopleInteraction playerToPeopleInteraction;
     
 
     public float bubbleCd = 10000f;
@@ -144,9 +144,12 @@ public class Player : Character
         _lastBubbleTime = Time.time;
         _nextBubbleTime = Time.time + bubbleCd/1000;
         screamBubble.gameObject.SetActive(true);
-        _screamInteraction.SocialDistancing();
+        playerToPeopleInteraction.SocialDistancing();
+    }
 
-
+    public void OnIsolationInput()
+    {
+        playerToPeopleInteraction.SendToIsolation();
     }
     
 }

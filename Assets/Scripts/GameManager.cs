@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour
 
 
     private float _lastSpawnTime;
+    private float _lvlIncreaseTime;
 
     private void Start()
     {
         _lastSpawnTime = Time.time;
+        SpawnPerson();
         
     }
 

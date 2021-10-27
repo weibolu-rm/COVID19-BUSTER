@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<Person> persons = new List<Person>();
     [SerializeField] private List<Transform> targets;
+    [SerializeField] private Transform isolationArea;
     private List<Transform> _spawns = new List<Transform>();
     
 
@@ -39,6 +40,7 @@ public class Spawner : MonoBehaviour
 
         person.PersonController.SetTargetsList(ref targets);
         person.PersonController.ChangeTarget();
+        person.SetIsolationArea(isolationArea);
 
         // Spawn prefab -> pass target list -> choose random target
         Instantiate(person, pos, Quaternion.identity);
@@ -52,6 +54,7 @@ public class Spawner : MonoBehaviour
 
         person.PersonController.SetTargetsList(ref targets);
         person.PersonController.ChangeTarget(target);
+        person.SetIsolationArea(isolationArea);
 
         // Spawn prefab -> pass target list -> choose random target
         Instantiate(person, pos, Quaternion.identity);

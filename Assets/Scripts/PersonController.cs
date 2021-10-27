@@ -14,16 +14,16 @@ public class PersonController : MonoBehaviour
 	[SerializeField] private Person person;
 	[SerializeField] private float timeBetweenTargets = 20f;
 	
-    [SerializeField] List<Transform> _targets;
+    [SerializeField] List<Transform> targets;
 	
 	private NavMeshAgent _agent;
 	private Vector2 _direction;
 	private float _lastTargetSwitchTime;
 
 
-	public void SetTargetsList( ref List<Transform> targets)
+	public void SetTargetsList( ref List<Transform> targetList)
 	{
-		_targets = targets;
+		this.targets = targetList;
 	}
 
 	public bool GetTileAtPositionData()
@@ -42,14 +42,15 @@ public class PersonController : MonoBehaviour
 	
     private void Update()
     {
-	    if (currentTarget && person.currentState == PersonState.Wandering)
+	    if (currentTarget && person.currentState != PersonState.Interacting)
 	    {
 			var targetPosition = currentTarget.position;
 			_agent.SetDestination(targetPosition);
 			_direction = (Vector2) (targetPosition - transform.position);
 	    }
 
-	    if (Time.time > _lastTargetSwitchTime + timeBetweenTargets)
+	    // If leaving or isolating, stop changing states randomly
+	    if (Time.time > _lastTargetSwitchTime + timeBetweenTargets && person.currentState == PersonState.Wandering)
 	    {
 		    ChangeTarget();
 	    }
@@ -66,14 +67,17 @@ public class PersonController : MonoBehaviour
     // Assign a random target
     public void ChangeTarget()
     {
-	    currentTarget = _targets[Random.Range(0, _targets.Count)];
+	    currentTarget = targets[Random.Range(0, targets.Count)];
 	    _lastTargetSwitchTime = Time.time;
     }
     
     // Choose target to assign
     public void ChangeTarget(Transform target)
     {
+	    Debug.Log("CHANGE TARGET");
 	    currentTarget = target;
+	    var targetPosition = currentTarget.position;
+	    _agent.SetDestination(targetPosition);
 	    _lastTargetSwitchTime = Time.time;
     }
     

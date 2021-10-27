@@ -47,9 +47,13 @@ public class IndicatorManager : MonoBehaviour
             EnableIndicator(vulnerable);
         }
 
-        if (person.isIsolating)
+        if (person.currentState == PersonState.Isolating)
         {
             EnableIndicator(isolating);
+            DisableIndicator(firstDose);
+            DisableIndicator(secondDose);
+            DisableIndicator(infected);
+            DisableIndicator(vulnerable);
         }
     }
 
