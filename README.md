@@ -59,6 +59,11 @@ Be careful because this will also cause a wave of people to enter the mall.
 
 **ESC**: Pause game
 
+
+
+# How to use code
+
+Copy the Assets, Packages and Project settings folders to an empty directory, and open folder as a unity project. I'm using Unity 2020.3.17f1.
 # Acknowledgements 
 
 - Unity2D doesn't support NavMesh natively, and so I'm using a free 2D implementation by h8man
